@@ -1,0 +1,233 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (DateTime.Now.Second % 2 == 0)
+{
+    <header>
+        @await Component.InvokeAsync("AzCarousel")
+    </header>
+}
+else
+{
+    <header>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide One -->
+                <div class="carousel-item active" style="background-image: url('https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=1600')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Blazor Server Part 1</h3>
+                        <p>회사 홈페이지와 관리자 페이지를 Blazor로 만드는 실전 웹개발 과정</p>
+                        <a class="btn btn-primary" href="http://www.devlec.com/?_pageVariable=courseDetail&code=PT001TB4369&method=S&relation=PT001TB4369_BlazorServer" target="_blank">강의 보기</a>
+                    </div>
+                </div>
+                <!-- Slide Two -->
+                <div class="carousel-item" style="background-image: url('https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1600')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Blazor 게시판 프로젝트 Part 2</h3>
+                        <p>공지사항, 자료실, 답변형 게시판을 Blazor로 직접 구현해보세요</p>
+                        <a class="btn btn-primary" href="http://www.devlec.com/?_pageVariable=courseDetail&code=PT001TB4370&method=S&relation=PT001TB4370_BlazorServerPart2" target="_blank">강의 보기</a>
+                    </div>
+                </div>
+                <!-- Slide Three -->
+                <div class="carousel-item" style="background-image: url('https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1600')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Blazor 실전 프로젝트 Part 3</h3>
+                        <p>hawaso.com 사이트를 직접 구현하며 실무 핵심 기능을 익히는 강의</p>
+                        <a class="btn btn-primary" href="http://www.devlec.com/?_pageVariable=courseDetail&code=PT001TB4371&method=S&relation=PT001TB4371_BlazorProject" target="_blank">강의 보기</a>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </header>
+}
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h4>Hawaso 프로젝트 GitHub</h4>
+            <ul style="list-style: none;">
+                <li>
+                    <a href="https://github.com/VisualAcademy/Hawaso.V3X" target="_blank">.NET Core V3.X 버전 소스</a>
+                </li>
+                <li>
+                    <a href="https://github.com/VisualAcademy/Hawaso.V50" target="_blank">.NET V5.0 버전 소스</a>
+                </li>
+                <li>
+                    <a href="https://github.com/VisualAcademy/Hawaso" target="_blank">.NET V8.0 버전 소스(현재 버전)</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <h1 class="my-4">하와소 사이트 방문을 환영합니다.</h1>
+
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <partial name="~/Views/Home/_CountDown.cshtml" />
+        </div>
+    </div>
+
+
+    <!-- Marketing Icons Section -->
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header">데브렉</h4>
+                <div class="card-body">
+                    <p class="card-text">프로그래밍 관련 학습의 모든 정보는 데브렉 사이트를 참고하세요.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="http://www.devlec.com" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header">비주얼아카데미</h4>
+                <div class="card-body">
+                    <p class="card-text">박용준 강사가 진행하는 닷넷 관련 주요 강의는 비주얼아카데미 유튜브 채널을 참고하세요.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://youtube.com/VisualAcademy" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header">자바캠퍼스</h4>
+                <div class="card-body">
+                    <p class="card-text">박용준 강사가 진행하는 자바 관련 주요 강의는 자바캠퍼스 유튜브 채널을 참고하세요.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- Portfolio Section -->
+    <h2>Portfolio Heading</h2>
+
+    <div class="row">
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="http://placeimg.com/700/400/any" alt=""></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Project One</a>
+                    </h4>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="http://placeimg.com/700/400/any" alt=""></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Project Two</a>
+                    </h4>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="http://placeimg.com/700/400/any" alt=""></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Project Three</a>
+                    </h4>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="http://placeimg.com/700/400/any" alt=""></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Project Four</a>
+                    </h4>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="http://placeimg.com/700/400/any" alt=""></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Project Five</a>
+                    </h4>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="http://placeimg.com/700/400/any" alt=""></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Project Six</a>
+                    </h4>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- Features Section -->
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Modern Business Features</h2>
+            <p>The Modern Business template by Start Bootstrap includes:</p>
+            <ul>
+                <li>
+                    <strong>Bootstrap v4</strong>
+                </li>
+                <li>jQuery</li>
+                <li>Font Awesome</li>
+                <li>Working contact form with validation</li>
+                <li>Unstyled page elements for easy customization</li>
+            </ul>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+        </div>
+        <div class="col-lg-6">
+            <img class="img-fluid rounded" src="https://placehold.it/700x450" alt="">
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <hr>
+
+    <!-- Call to Action Section -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
+        </div>
+    </div>
+
+</div>
+<!-- /.container -->

@@ -1,0 +1,105 @@
+﻿using BlazorInputFile;
+using Microsoft.AspNetCore.Components;
+using OfficeOpenXml;
+using VisualAcademy.Models.Replys;
+
+namespace Hawaso.Pages.Replys;
+
+public partial class Import
+{
+    #region Fields
+    /// <summary>
+    /// 첨부 파일 리스트 보관
+    /// </summary>
+    private IFileListEntry[] selectedFiles;
+    #endregion
+
+    #region Injectors
+    [Inject]
+    public IReplyRepository RepositoryReference { get; set; }
+
+    [Inject]
+    public NavigationManager Nav { get; set; }
+
+    [Inject]
+    public IFileStorageManager FileStorageManagerReference { get; set; } 
+    #endregion
+
+    protected Reply Model = new Reply();
+
+    public string ParentId { get; set; }
+
+    protected int[] parentIds = { 1, 2, 3 };
+
+    /// <summary>
+    /// 파일 업로드 버튼 클릭 이벤트 처리기
+    /// </summary>
+    protected async void FormSubmit()
+    {
+        int.TryParse(ParentId, out int parentId);
+        Model.ParentId = parentId;
+
+        #region 파일 업로드 관련 추가 코드 영역
+        if (selectedFiles != null && selectedFiles.Length > 0)
+        {
+            // 파일 업로드
+            var file = selectedFiles.FirstOrDefault();
+            var fileName = "";
+            int fileSize = 0;
+            if (file != null)
+            {
+                fileName = file.Name;
+                fileSize = Convert.ToInt32(file.Size);
+
+                fileName = await FileStorageManagerReference.UploadAsync(file.Data, file.Name, "", true);
+
+                Model.FileName = fileName;
+                Model.FileSize = fileSize;
+            } 
+        }
+        #endregion
+
+        foreach (var m in Models)
+        {
+            m.FileName = Model.FileName;
+            m.FileSize = Model.FileSize; 
+            await RepositoryReference.AddAsync(m);
+        }
+
+        Nav.NavigateTo("/Replys");
+    }
+
+    public List<Reply> Models { get; set; } = new List<Reply>(); 
+
+    protected async void HandleSelection(IFileListEntry[] files)
+    {
+        this.selectedFiles = files;
+
+        // 엑셀 데이터 읽어오기 
+        if (selectedFiles != null && selectedFiles.Length > 0)
+        {
+            var file = selectedFiles.FirstOrDefault();
+
+            using (var stream = new MemoryStream())
+            {
+                await file.Data.CopyToAsync(stream);
+
+                using (var package = new ExcelPackage(stream))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                    var rowCount = worksheet.Dimension.Rows;
+
+                    for (int row = 2; row <= rowCount; row++)
+                    {
+                        Models.Add(new Reply
+                        {
+                            Name = worksheet.Cells[row, 1].Value.ToString().Trim(),
+                            DownCount = int.Parse(worksheet.Cells[row, 2].Value.ToString().Trim()),
+                        }); ;
+                    }
+                }
+            }
+            StateHasChanged();
+        }
+    }
+}

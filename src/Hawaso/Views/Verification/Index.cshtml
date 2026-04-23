@@ -1,0 +1,55 @@
+﻿@using All.Controllers
+@model IndexViewModel
+@{
+    ViewData["Title"] = "Manage your security settings";
+}
+
+<h2>@ViewData["Title"]</h2>
+<p class="text-success">@ViewData["StatusMessage"]</p>
+
+<div>
+    <h3>Update your phone number and 2FA settings</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt class="h4">Phone Number:</dt>
+        <dd>
+            @(Model.PhoneNumber ?? "None")
+            @if (Model.PhoneNumber != null)
+            {
+                <br />
+                <a asp-controller="Verification" asp-action="AddPhoneNumber" class="btn btn-primary">Change</a>
+                <form asp-controller="Verification" asp-action="RemovePhoneNumber" method="post">
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+            }
+            else
+            {
+                <br />
+                <a asp-controller="Verification" asp-action="AddPhoneNumber" class="btn btn-primary">Add</a>
+            }
+        </dd>
+
+        <dt class="h4">Two-Factor Authentication:</dt>
+        <dd>
+            @if (Model.TwoFactor)
+            {
+                <form asp-controller="Verification" asp-action="DisableTwoFactorAuthentication" method="post" class="form-horizontal">
+                    Enabled <button type="submit" class="btn btn-primary">Disable</button>
+                </form>
+                <p class="text-success">Your account is protected with Two-Factor Authentication (2FA). This adds an extra layer of security.</p>
+            }
+            else
+            {
+                <form asp-controller="Verification" asp-action="EnableTwoFactorAuthentication" method="post" class="form-horizontal">
+                    <button type="submit" class="btn btn-primary" @(Model.IsEmailConfirmed && Model.IsPhoneNumberConfirmed ? "" : "disabled")>Enable</button>
+                    Disabled
+                </form>
+                <p class="text-warning">For better security, we highly recommend enabling Two-Factor Authentication (2FA) to protect your account.</p>
+                @if (!Model.IsEmailConfirmed || !Model.IsPhoneNumberConfirmed)
+                {
+                    <p class="text-danger">To enable 2FA, both your email and phone number must be verified.</p>
+                }
+            }
+        </dd>
+    </dl>
+</div>
